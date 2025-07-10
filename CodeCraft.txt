@@ -1,0 +1,129 @@
+CodeCraft.ai - Project Documentation
+
+📌 Project Overview
+
+CodeCraft.ai is an AI-powered web application that enables users to generate complete frontend projects using natural language prompts. Users can describe what they want (e.g., “Build a portfolio website”) and receive structured code (React or HTML/CSS/JS). The app includes credit-based access, OAuth login, real-time database storage, Razorpay integration for purchasing credits, and live preview of generated HTML code.
+
+⸻
+
+🛠️ Tools and Technologies Used
+
+Frontend:
+	•	React.js - UI framework
+	•	Vite - Fast build tool and development server
+	•	Styled-components - Component-level styling
+	•	JSZip + FileSaver - For dynamic zip generation and downloads
+	•	Lucide-react / react-icons - Icons for UI
+
+Backend / Services:
+	•	Firebase
+	•	Firebase Auth (OAuth with Google & GitHub)
+	•	Firestore (real-time NoSQL database)
+	•	OpenRouter API
+	•	Model: meta-llama/llama-3-8b-instruct
+	•	Purpose: Generate code based on user prompt
+	•	Razorpay
+	•	Used to handle credit purchases
+
+⸻
+
+🔐 Authentication Integration
+	•	Implemented using Firebase Authentication
+	•	Supports Google and GitHub OAuth providers
+	•	User state is tracked using onAuthStateChanged
+	•	AuthContext provides global access to user info and admin role
+
+⸻
+
+🧠 LLM Integration via OpenRouter
+	•	Integrated OpenRouter API
+	•	Prompted the llama-3-8b-instruct model with custom system prompts
+	•	Based on user’s tech selection (React or HTML), model returns structured code
+	•	Example use cases:
+	•	“Build a responsive blog with categories”
+	•	“Create an HTML landing page for an app”
+
+⸻
+
+💳 Razorpay Integration
+	•	Used for purchasing credits (20, 50, 100)
+	•	Razorpay handler() updates Firestore:
+	•	Adds credits to user
+	•	Logs transaction with time and payment ID
+	•	Displays success modal and redirects user
+
+⸻
+
+⚙️ Core Functionalities
+
+Prompt Input and Code Generation
+	•	Accepts user input via text or voice (SpeechRecognition API)
+	•	Provides AI prompt suggestions
+	•	Dropdown to choose tech stack (React / HTML)
+	•	Shows loading + success modals after generation
+
+AI Integration Logic
+	•	Sends API call to OpenRouter with system and user prompt
+	•	Handles both React and HTML code generation and formatting
+
+Admin Dashboard
+	•	View total users, credits, revenue, and projects generated
+	•	Modals to view individual user prompts and purchases
+	•	Analytics dashboard with charts and summaries
+
+Code Download and Live Preview
+	•	Downloads project as .zip file using JSZip
+	•	React zip includes:
+	•	public/index.html
+	•	src/index.js, App.jsx
+	•	package.json, README.md
+	•	HTML zip includes:
+	•	index.html, style.css, script.js
+	•	Live Preview:
+	•	HTML projects are rendered directly in the browser using a sandboxed <iframe>
+	•	Shows the result of the generated code in real time before download
+
+Credit Pricing and Payments
+	•	Lists available plans and handles credit purchases
+	•	Uses Razorpay for payment gateway
+	•	On success, updates user data with credit and purchase info
+
+Email Notifications
+	•	Sends email notifications to users on credit usage and purchases
+	•	Can be expanded for admin alerts and billing summaries
+
+Authentication Management
+	•	Tracks login/logout status using Firebase
+	•	Stores admin role based on email match
+
+⸻
+
+✅ Conclusion
+
+CodeCraft.ai successfully combines AI + DevTools to automate frontend code generation. It uses modern tools (Firebase, React, Vite, Razorpay) and LLMs to deliver a seamless, production-ready experience.
+
+Users can log in, generate projects with voice or text prompts, preview live code inside the browser, purchase credits securely, and download runnable project code. Admins can track activity via analytics dashboards.
+
+⸻
+
+🚀 Future Enhancements
+	•	🔄 Credit auto-debit per generation
+	•	📁 Multi-file React generation (Home.jsx, Navbar.jsx, etc.)
+	•	🌍 Add more providers (Facebook, Apple)
+	•	💾 Download as GitHub repo / Gist
+	•	🤖 Chat-based assistant for prompt refinement
+
+⸻
+
+🔍 Additional Notes
+	•	The app follows a modular component structure for better scalability
+	•	Authentication and data access are separated by role (user/admin)
+	•	API keys and credentials should be secured in a production environment
+	•	System is extendable to support other LLMs or output formats (Vue, Angular, etc.)
+	•	Prompt and purchase data can be analyzed for future product decisions
+
+⸻
+
+🧩 Summary
+
+CodeCraft.ai turns natural prompts into working frontend code using LLMs. It includes login, payment, admin tracking, email notifications, live previews, and downloadable projects — built with React, Firebase, and OpenRouter.
