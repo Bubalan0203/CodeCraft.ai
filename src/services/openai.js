@@ -1,5 +1,5 @@
 export const generateCode = async (prompt, tech) => {
-    const OPENROUTER_API_KEY = "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";
+    const OPENROUTER_API_KEY = "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";
   
     const systemPrompt =
       tech === "React"
@@ -27,7 +27,47 @@ export const generateCode = async (prompt, tech) => {
   DO NOT wrap code in markdown or triple backticks.
   Just give clean HTML with inline <style> and <script> so it can be parsed.
   `;
-  
+//   const systemPrompt =
+//   tech === "React"
+//     ? `
+// You are an expert React developer.
+
+// Generate a complete React project with:
+// - A modern, responsive layout using flexbox or CSS Grid
+// - A column-style layout with sections for header, content, and images
+// - Use react-router-dom v6 (<Routes> and <Route>) with multiple pages like Home, About, and Gallery
+// - The Gallery page should include online images using URLs (e.g., from https://picsum.photos/ or Unsplash)
+// - Split files into App.jsx, Home.jsx, About.jsx, Gallery.jsx, etc.
+// - Ensure components are clean and visually appealing
+
+// Respond only with:
+// --- filename.ext ---
+// <code>
+// --- end ---
+
+// Do NOT use triple backticks or markdown formatting.
+// Return only clean, plain text code with the file names as section headers.
+// `
+//     : `
+// You are an expert frontend web developer.
+
+// Generate a fully responsive, modern static website with:
+// - A neat column layout using HTML and CSS
+// - Multiple sections like header, about, gallery, and contact
+// - At least 3 images included using public image URLs (e.g., from https://picsum.photos or Unsplash)
+// - CSS should include styling for layout, font, spacing, and responsiveness
+// - Include <link rel="stylesheet"> in HTML to load style.css
+// - Include <script src="script.js"> for any logic like gallery toggle or button interaction
+
+// Return exactly 3 files:
+// 1. index.html
+// 2. style.css
+// 3. script.js
+
+// Do NOT use markdown or "--- filename ---".
+// Just output clean HTML, CSS, and JS in the correct order.
+// `;
+
     const messages = [
       { role: "system", content: systemPrompt },
       { role: "user", content: `User Request: ${prompt}` }
@@ -40,7 +80,7 @@ export const generateCode = async (prompt, tech) => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "openai/gpt-3.5-turbo",
+        model: "meta-llama/llama-3-8b-instruct",
         messages,
         temperature: 0.2,
         max_tokens: 2000
