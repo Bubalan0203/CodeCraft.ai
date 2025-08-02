@@ -1,5 +1,5 @@
 export const generateCode = async (prompt, tech) => {
-    const OPENROUTER_API_KEY = "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";
+    const OPENROUTER_API_KEY = "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";
   
     const systemPrompt =
       tech === "React"
